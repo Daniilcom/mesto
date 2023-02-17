@@ -1,6 +1,13 @@
 .header {
   max-width: 880px;
   margin: 45px auto 40px;
-  display: flex;
   border-bottom: 1px solid #545454b3;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    max-width: 100%;
+    margin: 8.75% 0 13.125%;
+  }
 }
