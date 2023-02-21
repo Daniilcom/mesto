@@ -8,3 +8,10 @@
   background-repeat: no-repeat;
   cursor: pointer;
 }
+
+@media screen and (max-width: 380px) {
+  .profile__edit {
+    width: 18px;
+    height: 18px;
+  }
+}

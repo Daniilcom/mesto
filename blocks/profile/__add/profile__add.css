@@ -8,3 +8,22 @@
   background-repeat: no-repeat;
   cursor: pointer;
 }
+
+@media screen and (max-width: 900px) {
+  .profile__add {
+    margin-right: 8.5%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile__add {
+    width: 336px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .profile__add {
+    width: 88.125vw;
+  }
+}
