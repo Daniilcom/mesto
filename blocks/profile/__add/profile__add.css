@@ -7,6 +7,11 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
+  transition: opacity 0.4s;
+}
+
+.profile__add:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 900px) {

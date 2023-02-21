@@ -8,4 +8,13 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
+  transition: opacity 0.4s;
+}
+
+.gallary__like:hover {
+  opacity: 0.5;
+}
+
+.gallary__like:active {
+  background-image: url(../../../images/icons/like_active_button.svg);
 }
