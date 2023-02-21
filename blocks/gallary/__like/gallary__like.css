@@ -1,6 +1,7 @@
 .gallary__like {
-  width: 22px;
-  height: 19px;
+  min-width: 22px;
+  min-height: 19px;
+  margin: 0;
   border: none;
   background-color: #ffffff;
   background-image: url(../../../images/icons/like_button.svg);
