@@ -11,3 +11,9 @@
 @import url(../blocks/profile/__edit/profile__edit.css);
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__add/profile__add.css);
+@import url(../blocks/gallary/gallary.css);
+@import url(../blocks/gallary/__item/gallary__item.css);
+@import url(../blocks/gallary/__image/gallary__image.css);
+@import url(../blocks/gallary/__info/gallary__info.css);
+@import url(../blocks/gallary/__description/gallary__description.css);
+@import url(../blocks/gallary/__like/gallary__like.css);
