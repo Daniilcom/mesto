@@ -17,3 +17,5 @@
 @import url(../blocks/gallary/__info/gallary__info.css);
 @import url(../blocks/gallary/__description/gallary__description.css);
 @import url(../blocks/gallary/__like/gallary__like.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__сopyright/footer__сopyright.css);

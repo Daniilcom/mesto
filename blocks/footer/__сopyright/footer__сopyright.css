@@ -1,0 +1,19 @@
+.footer__сopyright {
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #545454;
+}
+
+@media screen and (max-width: 900px) {
+  .footer__сopyright {
+    margin-left: 8.5%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer__сopyright {
+    margin-left: 5.9375%;
+  }
+}
