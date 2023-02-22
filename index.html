@@ -104,7 +104,7 @@
     <footer class="footer">
       <div class="footer__сopyright">&copy; 2023 Mesto Russia</div>
     </footer>
-    <div class="popup-edit">
+    <div class="popup-edit popup-edit__open">
       <div class="popup-edit__container">
         <button
           type="button"
@@ -114,12 +114,16 @@
         <h3 class="popup-edit__title">Редактировать профиль</h3>
         <form class="popup-edit__form">
           <label>
-            <input type="text" class="popup-edit__input" value="Жак-Ив Кусто" />
+            <input
+              type="text"
+              class="popup-edit__input popup-edit__input_user_name"
+              value="Жак-Ив Кусто"
+            />
           </label>
           <label>
             <input
               type="text"
-              class="popup-edit__input"
+              class="popup-edit__input popup-edit__input_user_description"
               value="Исследователь океана"
             />
           </label>
@@ -127,5 +131,6 @@
         </form>
       </div>
     </div>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
