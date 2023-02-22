@@ -3,10 +3,7 @@
   min-height: 19px;
   margin: 0;
   border: none;
-  background-color: #ffffff;
-  background-image: url(../../../images/icons/like_button.svg);
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url(../../../images/icons/like_button.svg);
   cursor: pointer;
   transition: opacity 0.4s;
 }
@@ -16,5 +13,5 @@
 }
 
 .gallary__like:active {
-  background-image: url(../../../images/icons/like_active_button.svg);
+  background: url(../../../images/icons/like_active_button.svg);
 }

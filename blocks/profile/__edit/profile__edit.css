@@ -3,7 +3,7 @@
   height: 24px;
   background-color: #000;
   border: 1px solid #fff;
-  background-image: url(../../../images/icons/edit_button.svg);
+  background: url(../../../images/icons/edit_button.svg);
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
