@@ -6,6 +6,8 @@
   right: -40px;
   border: none;
   background: url(../../../images/icons/close__button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
   cursor: pointer;
   transition: opacity 0.4s;
 }
@@ -21,6 +23,5 @@
     top: -36px;
     right: 0;
     background-size: 20px;
-    right: 0;
   }
 }

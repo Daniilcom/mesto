@@ -1,7 +1,6 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
 @import url(../blocks/root/root.css);
-@import url(../blocks/list/list.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/profile.css);
@@ -17,6 +16,8 @@
 @import url(../blocks/gallary/__info/gallary__info.css);
 @import url(../blocks/gallary/__description/gallary__description.css);
 @import url(../blocks/gallary/__like/gallary__like.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup-edit/popup-edit.css);
 @import url(../blocks/popup-edit/__open/popup-edit__open.css);
 @import url(../blocks/popup-edit/__container/popup-edit__container.css);
@@ -25,5 +26,3 @@
 @import url(../blocks/popup-edit/__form/popup-edit__form.css);
 @import url(../blocks/popup-edit/__input/popup-edit__input.css);
 @import url(../blocks/popup-edit/__submit/popup-edit__submit.css);
-@import url(../blocks/footer/footer.css);
-@import url(../blocks/footer/__сopyright/footer__сopyright.css);

@@ -3,7 +3,7 @@
   height: 50px;
   background-color: #000;
   border: 1px solid #fff;
-  background-image: url(../../../images/icons/add_button.svg);
+  background: url(../../../images/icons/add_button.svg);
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
@@ -27,7 +27,7 @@
   }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 500px) {
   .profile__add {
     width: 88.125vw;
   }

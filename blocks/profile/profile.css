@@ -15,7 +15,7 @@
   }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 500px) {
   .profile {
     margin-bottom: 36px;
   }
