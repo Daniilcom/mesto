@@ -9,8 +9,15 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 900px) {
   .profile__description {
+    max-width: 36.5vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .profile__description {
+    max-width: 189px;
     font-size: 14px;
     line-height: 1.22;
   }
