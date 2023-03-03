@@ -1,4 +1,4 @@
-.popup-edit__close {
+.popup__close {
   width: 32px;
   height: 32px;
   position: absolute;
@@ -12,12 +12,12 @@
   transition: opacity 0.4s;
 }
 
-.popup-edit__close:hover {
+.popup__close:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 550px) {
-  .popup-edit__close {
+  .popup__close {
     width: 20px;
     height: 20px;
     top: -36px;

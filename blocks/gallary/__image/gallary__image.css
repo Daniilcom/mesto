@@ -1,3 +1,7 @@
 .gallary__image {
+  max-width: 282px;
+  min-height: 282px;
+  display: block;
+  object-fit: cover;
   border-radius: 10px 10px 0px 0px;
 }

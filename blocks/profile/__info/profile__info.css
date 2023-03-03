@@ -1,5 +1,4 @@
 .profile__info {
-  max-width: 336px;
   margin: 0 auto 0 30px;
   display: grid;
   align-items: baseline;
@@ -16,7 +15,7 @@
 
 @media screen and (max-width: 380px) {
   .profile__info {
-    margin: 26px auto 36px;
+    margin: 9% 10% 9.5% 19%;
     gap: 14px 10px;
   }
 }

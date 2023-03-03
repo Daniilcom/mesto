@@ -12,7 +12,9 @@
 
 @media screen and (max-width: 320px) {
   .header__logo {
-    max-width: 32vw;
+    max-width: 32.5vw;
+    max-height: 7.625vw;
     margin-bottom: 10%;
+    padding: 0;
   }
 }

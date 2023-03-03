@@ -1,4 +1,7 @@
 .gallary__item {
   background-color: #ffffff;
   border-radius: 10px;
+  display: grid;
+  grid-template-columns: 282px;
+  grid-template-rows: repeat(2, minmax(min-content, max-content));
 }
