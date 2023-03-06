@@ -3,5 +3,5 @@
   border-radius: 10px;
   display: grid;
   grid-template-columns: 282px;
-  grid-template-rows: repeat(2, minmax(min-content, max-content));
+  grid-template-rows: 282px minmax(min-content, max-content);
 }

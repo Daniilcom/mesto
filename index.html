@@ -33,80 +33,13 @@
         ></button>
       </section>
       <section class="gallary">
-        <ul class="gallary__items list">
-          <li class="gallary__item">
-            <img
-              src="./images/gallery__item1.png"
-              class="gallary__image"
-              alt="Место"
-            />
-            <div class="gallary__info">
-              <h2 class="gallary__description">Карачаевск</h2>
-              <button type="button" class="gallary__like"></button>
-            </div>
-          </li>
-          <li class="gallary__item">
-            <img
-              src="./images/gallery__item2.png"
-              class="gallary__image"
-              alt="Место"
-            />
-            <div class="gallary__info">
-              <h2 class="gallary__description">Гора Эльбрус</h2>
-              <button type="button" class="gallary__like"></button>
-            </div>
-          </li>
-          <li class="gallary__item">
-            <img
-              src="./images/gallery__item3.png"
-              class="gallary__image"
-              alt="Место"
-            />
-            <div class="gallary__info">
-              <h2 class="gallary__description">Домбай</h2>
-              <button type="button" class="gallary__like"></button>
-            </div>
-          </li>
-          <li class="gallary__item">
-            <img
-              src="./images/gallery__item2.png"
-              class="gallary__image"
-              alt="Место"
-            />
-            <div class="gallary__info">
-              <h2 class="gallary__description">Гора Эльбрус</h2>
-              <button type="button" class="gallary__like"></button>
-            </div>
-          </li>
-          <li class="gallary__item">
-            <img
-              src="./images/gallery__item4.jpg"
-              class="gallary__image"
-              alt="Место"
-            />
-            <div class="gallary__info">
-              <h2 class="gallary__description">Домбай</h2>
-              <button type="button" class="gallary__like"></button>
-            </div>
-          </li>
-          <li class="gallary__item">
-            <img
-              src="./images/gallery__item1.png"
-              class="gallary__image"
-              alt="Место"
-            />
-            <div class="gallary__info">
-              <h2 class="gallary__description">Карачаево-Черкесия</h2>
-              <button type="button" class="gallary__like"></button>
-            </div>
-          </li>
-        </ul>
+        <ul class="gallary__items list"></ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div id="popup-edit" class="popup">
       <div class="popup__container">
         <button type="button" class="popup__close" title="Закрыть"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
@@ -127,6 +60,40 @@
         </form>
       </div>
     </div>
+    <div id="popup-add" class="popup">
+      <div class="popup__container">
+        <button type="button" class="popup__close" title="Закрыть"></button>
+        <h3 class="popup__title">Новое место</h3>
+        <form name="popup-form" class="popup__form">
+          <input
+            name="place"
+            id="place"
+            type="text"
+            class="popup__input popup__input_place_name"
+            required
+            placeholder="Название"
+          />
+          <input
+            name="link"
+            id="link"
+            type="text"
+            class="popup__input popup__input_place_link"
+            required
+            placeholder="Ссылка на картинку"
+          />
+          <button class="popup__submit" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <template id="gallary-item">
+      <li class="gallary__item">
+        <img class="gallary__image" alt="Место" />
+        <div class="gallary__info">
+          <h2 class="gallary__description"></h2>
+          <button type="button" class="gallary__like"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
