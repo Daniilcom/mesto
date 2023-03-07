@@ -19,7 +19,7 @@ const namePlaceInput = formPlace.querySelector('.popup__input_place_name')
 const linkPlaceInput = formPlace.querySelector('.popup__input_place_link')
 //popup-img
 const popupImg = document.querySelector('#popup-img')
-const closePopumImg = popupImg.querySelector('.popup__close')
+const closePopupImg = popupImg.querySelector('.popup__close')
 
 const initialGallary = [
   {
@@ -115,4 +115,4 @@ closeformPlace.addEventListener('click', () => togglePopup(formPlace))
 formPlace.addEventListener('submit', newItem)
 
 //popup-img
-closePopumImg.addEventListener('click', () => togglePopup(popupImg))
+closePopupImg.addEventListener('click', () => togglePopup(popupImg))
