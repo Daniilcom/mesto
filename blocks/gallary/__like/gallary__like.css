@@ -13,7 +13,3 @@
 .gallary__like:hover {
   opacity: 0.5;
 }
-
-.gallary__like:active {
-  background: url(../../../images/icons/like_active_button.svg);
-}
