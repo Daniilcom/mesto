@@ -1,10 +1,10 @@
-const gallaryItems = document.querySelector('.gallary__items')
+const gallary = document.querySelector('.gallary__items')
 const templateItem = document.querySelector('#gallary-item')
-const gallaryItem = templateItem.querySelector('.gallary__item')
+const gallaryItem = templateItem.content.querySelector('.gallary__item')
 // popup-edit
-const editProfile = document.querySelector('.profile__edit')
+const editorProfile = document.querySelector('.profile__edit')
 const formProfile = document.querySelector('#popup-edit')
-const closeFormProfile = formProfile.querySelector('.popup__close')
+const profileCloseElement = formProfile.querySelector('.popup__close')
 const nameInput = formProfile.querySelector('.popup__input_user_name')
 const descriptionInput = formProfile.querySelector(
   '.popup__input_user_description'
@@ -12,107 +12,107 @@ const descriptionInput = formProfile.querySelector(
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description')
 //popup-add
-const addPlace = document.querySelector('.profile__add')
+const buttonAddPlace = document.querySelector('.profile__add')
 const formPlace = document.querySelector('#popup-add')
-const closeformPlace = formPlace.querySelector('.popup__close')
+const placeCloseElement = formPlace.querySelector('.popup__close')
 const namePlaceInput = formPlace.querySelector('.popup__input_place_name')
 const linkPlaceInput = formPlace.querySelector('.popup__input_place_link')
 //popup-img
 const popupImg = document.querySelector('#popup-img')
-const closePopupImg = popupImg.querySelector('.popup__close')
+const imgCloseElement = popupImg.querySelector('.popup__close')
 
-const initialGallary = [
-  {
-    place: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    place: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    place: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    place: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    place: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    place: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-]
+const openPopup = (popup) => {
+  popup.classList.add('popup_open')
+}
 
-const addItem = (place, link) => {
+const closePopup = (popup) => {
+  popup.classList.remove('popup_open')
+}
+
+const openProfilePopup = () => {
+  openPopup(formProfile)
+  nameInput.value = profileName.textContent
+  descriptionInput.value = profileDescription.textContent
+}
+
+const handleFormSubmit = (evt) => {
+  evt.preventDefault()
+  const nameValue = nameInput.value
+  const descriptionValue = descriptionInput.value
+  profileName.textContent = nameValue
+  profileDescription.textContent = descriptionValue
+  closePopup(formProfile)
+}
+
+const itemData = initialCards.map((item) => {
+  return {
+    name: item.name,
+    link: item.link,
+  }
+})
+
+const createItem = (itemData) => {
   const contentItem = templateItem.content
   const cloneItem = contentItem.cloneNode(true)
-  cloneItem.querySelector('.gallary__description').textContent = place
-  cloneItem.querySelector('.gallary__image').src = link
+  cloneItem.querySelector('.gallary__description').textContent = itemData.name
+  cloneItem.querySelector('.gallary__image').src = itemData.link
+  cloneItem.querySelector('.gallary__image').alt = `${itemData.name}`
+
   cloneItem
     .querySelector('.gallary__like')
     .addEventListener('click', (evt) =>
       evt.target.classList.toggle('gallary__like_active')
     )
   cloneItem
-  cloneItem
     .querySelector('.gallary__trash')
     .addEventListener('click', (evt) =>
       evt.target.closest('.gallary__item').remove()
     )
-  const popupOpenImg = () => {
-    popupImg.querySelector('.popup__name').textContent = place
-    popupImg.querySelector('.popup__image').src = link
-    togglePopup(popupImg)
+  const openImgPopup = () => {
+    popupImg.querySelector('.popup__name').textContent = itemData.name
+    popupImg.querySelector('.popup__image').src = itemData.link
+    popupImg.querySelector('.popup__image').alt = `${itemData.name}`
+    openPopup(popupImg)
   }
   cloneItem
     .querySelector('.gallary__image')
-    .addEventListener('click', popupOpenImg)
+    .addEventListener('click', openImgPopup)
+
+  gallary.prepend(cloneItem)
 
   return cloneItem
 }
 
-const defaultGallary = () =>
-  initialGallary.map((item) => {
-    gallaryItems.append(addItem(item.place, item.link))
-  })
+const addDefaultGallary = () => {
+  itemData.forEach(createItem)
+}
 
-defaultGallary()
-
-const newItem = (evt) => {
+const addNewItem = (evt) => {
   evt.preventDefault()
-  gallaryItems.prepend(addItem(namePlaceInput.value, linkPlaceInput.value))
+  gallary.prepend(
+    createItem({
+      name: namePlaceInput.value,
+      link: linkPlaceInput.value,
+    })
+  )
+  closePopup(formPlace)
+  namePlaceInput.value = ''
+  linkPlaceInput.value = ''
 }
 
-const handlerFormSubmit = (evt) => {
-  evt.preventDefault()
-  let nameValue = nameInput.value
-  let descriptionValue = descriptionInput.value
-  profileName.textContent = nameValue
-  profileDescription.textContent = descriptionValue
-}
-
-const togglePopup = (popup) => {
-  popup.classList.toggle('popup_open')
-  nameInput.value = profileName.textContent
-  descriptionInput.value = profileDescription.textContent
-}
+addDefaultGallary()
 
 // popup-edit
 
-editProfile.addEventListener('click', () => togglePopup(formProfile))
-closeFormProfile.addEventListener('click', () => togglePopup(formProfile))
-formProfile.addEventListener('submit', handlerFormSubmit)
+editorProfile.addEventListener('click', () => openProfilePopup())
+profileCloseElement.addEventListener('click', () => closePopup(formProfile))
+formProfile.addEventListener('submit', handleFormSubmit)
 
 //popup-add
 
-addPlace.addEventListener('click', () => togglePopup(formPlace))
-closeformPlace.addEventListener('click', () => togglePopup(formPlace))
-formPlace.addEventListener('submit', newItem)
+buttonAddPlace.addEventListener('click', () => openPopup(formPlace))
+placeCloseElement.addEventListener('click', () => closePopup(formPlace))
+formPlace.addEventListener('submit', addNewItem)
 
 //popup-img
-closePopupImg.addEventListener('click', () => togglePopup(popupImg))
+imgCloseElement.addEventListener('click', () => closePopup(popupImg))
