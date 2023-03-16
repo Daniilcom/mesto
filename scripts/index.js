@@ -78,13 +78,13 @@ const createItem = (itemData) => {
     .querySelector('.gallary__image')
     .addEventListener('click', openImgPopup)
 
-  gallary.prepend(cloneItem)
-
   return cloneItem
 }
 
 const addDefaultGallary = () => {
-  itemData.forEach(createItem)
+  itemData.forEach((item) => {
+    gallary.append(createItem(item))
+  })
 }
 
 const addNewItem = (evt) => {
