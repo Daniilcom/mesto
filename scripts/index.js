@@ -1,6 +1,7 @@
 const gallary = document.querySelector('.gallary__items')
 const templateItem = document.querySelector('#gallary-item')
 const gallaryItem = templateItem.content.querySelector('.gallary__item')
+const popupItems = document.querySelectorAll('.popup')
 // popup-edit
 const editorProfile = document.querySelector('.profile__edit')
 const formProfile = document.querySelector('#popup-edit')
@@ -23,11 +24,28 @@ const imgCloseElement = popupImg.querySelector('.popup__close')
 
 const openPopup = (popup) => {
   popup.classList.add('popup_open')
+  document.addEventListener('keydown', closePopupEsc)
 }
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_open')
+  document.removeEventListener('keydown', closePopupEsc)
 }
+
+const closePopupEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_open')
+    closePopup(popupOpened)
+  }
+}
+
+const closePopupСlick = popupItems.forEach((popupItem) => {
+  popupItem.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_open')) {
+      closePopup(popupItem)
+    }
+  })
+})
 
 const openProfilePopup = () => {
   openPopup(formProfile)
