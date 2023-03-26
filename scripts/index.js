@@ -64,6 +64,7 @@ const handleProfileFormSubmit = (evt) => {
   const descriptionValue = descriptionInput.value
   profileName.textContent = nameValue
   profileDescription.textContent = descriptionValue
+  evt.target.reset()
   closePopup(profilePopup)
 }
 
@@ -114,7 +115,6 @@ const addNewItem = (evt) => {
     })
   )
   evt.target.reset()
-  toggleButtonState(placeForm, placeFormSubmit, validationSettings)
   closePopup(placePopup)
 }
 
