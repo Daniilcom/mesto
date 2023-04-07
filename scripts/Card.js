@@ -20,7 +20,8 @@ class Card {
   }
 
   _handleCardDelete() {
-    this.trashButton.closest('.gallary__item').remove()
+    this._element.remove()
+    this._element = null
   }
 
   _setEventListeners() {
