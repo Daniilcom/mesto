@@ -1,6 +1,9 @@
+import { initialCards } from './data-cards.js'
+import { validationSettings } from './validation-settings.js'
+import { Card } from './Card.js'
+import { FormValidator } from './FormValidator.js'
+
 const gallary = document.querySelector('.gallary__items')
-const templateItem = document.querySelector('#gallary-item')
-const gallaryItem = templateItem.content.querySelector('.gallary__item')
 const popupItems = document.querySelectorAll('.popup')
 // popup-edit
 const editorProfile = document.querySelector('.profile__edit')
@@ -18,7 +21,6 @@ const placePopup = document.querySelector('#popup-add')
 const placeForm = document.forms['place-form']
 const namePlaceInput = placePopup.querySelector('.popup__input_place_name')
 const linkPlaceInput = placePopup.querySelector('.popup__input_place_link')
-const placeFormSubmit = placePopup.querySelector('.popup__submit')
 //popup-img
 const popupImg = document.querySelector('#popup-img')
 const imgName = popupImg.querySelector('.popup__name')
@@ -68,51 +70,35 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(profilePopup)
 }
 
-const createItem = (initialCards) => {
-  const contentItem = templateItem.content
-  const cloneItem = contentItem.cloneNode(true)
-  cloneItem.querySelector('.gallary__description').textContent =
-    initialCards.name
-  const cloneGallaryImg = cloneItem.querySelector('.gallary__image')
-  cloneGallaryImg.src = initialCards.link
-  cloneGallaryImg.alt = `${initialCards.name}`
-
-  cloneItem
-    .querySelector('.gallary__like')
-    .addEventListener('click', (evt) =>
-      evt.target.classList.toggle('gallary__like_active')
-    )
-  cloneItem
-    .querySelector('.gallary__trash')
-    .addEventListener('click', (evt) =>
-      evt.target.closest('.gallary__item').remove()
-    )
-  const openImgPopup = () => {
-    imgName.textContent = initialCards.name
-    img.src = initialCards.link
-    img.alt = `${initialCards.name}`
-    openPopup(popupImg)
-  }
-  cloneItem
-    .querySelector('.gallary__image')
-    .addEventListener('click', openImgPopup)
-
-  return cloneItem
+const createItem = (data, tamplate, handleItemClick) => {
+  const card = new Card(data, tamplate, handleItemClick)
+  return card.createCard()
 }
 
 const addDefaultGallary = () => {
   initialCards.forEach((item) => {
-    gallary.append(createItem(item))
+    gallary.append(createItem(item, '#gallary-item', openImgPopup))
   })
+}
+
+const openImgPopup = (name, link) => {
+  imgName.textContent = name
+  img.src = link
+  img.alt = name
+  openPopup(popupImg)
 }
 
 const addNewItem = (evt) => {
   evt.preventDefault()
   gallary.prepend(
-    createItem({
-      name: namePlaceInput.value,
-      link: linkPlaceInput.value,
-    })
+    createItem(
+      {
+        name: namePlaceInput.value,
+        link: linkPlaceInput.value,
+      },
+      '#gallary-item',
+      openImgPopup
+    )
   )
   evt.target.reset()
   closePopup(placePopup)
@@ -120,10 +106,17 @@ const addNewItem = (evt) => {
 
 addDefaultGallary()
 
-// popup-edit
+// popup - edit
 editorProfile.addEventListener('click', () => openProfilePopup())
 profilePopup.addEventListener('submit', handleProfileFormSubmit)
 
 //popup-add
 buttonAddPlace.addEventListener('click', () => openPopup(placePopup))
 placePopup.addEventListener('submit', addNewItem)
+
+//validation
+const validationEdit = new FormValidator(validationSettings, profileForm)
+const validationAdd = new FormValidator(validationSettings, placeForm)
+
+validationEdit.enableValidation()
+validationAdd.enableValidation()
