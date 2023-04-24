@@ -2,19 +2,22 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место</title>
   </head>
   <body class="root">
     <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="Логотип Место" />
+      <img
+        class="header__logo"
+        src="<%=require('./images/logo.svg')%>"
+        alt="Логотип Место"
+      />
     </header>
     <main class="content">
       <section class="profile">
         <img
           class="profile__avatar"
-          src="./images/profile__avatar.jpg"
+          src="<%=require('./images/profile__avatar.jpg')%>"
           alt="Аватар"
         />
         <div class="profile__info">
