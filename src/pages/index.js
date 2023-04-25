@@ -19,18 +19,18 @@ import {
 } from '../utils/constants.js'
 
 //render cards
-const addDefaultCards = new Section(
+const cardList = new Section(
   {
     items: initialCards,
     renderer: renderDefaultCards,
   },
   '.gallary__items'
 )
-addDefaultCards.renderItems()
+cardList.renderItems()
 
 function renderDefaultCards(item) {
   const card = new Card(item, '#gallary-item', handleCardClick)
-  addDefaultCards.addItem(card.createCard())
+  cardList.addItem(card.createCard())
 }
 
 const createItem = (data, tamplate, handleItemClick) => {
@@ -72,7 +72,7 @@ const popupAddCard = new PopupWithForm('#popup-add', handleAddFormSubmit)
 popupAddCard.setEventListeners()
 
 function handleAddFormSubmit() {
-  addDefaultCards.addItem(
+  cardList.addItem(
     createItem(
       {
         name: namePlaceInput.value,
