@@ -28,14 +28,14 @@ const cardList = new Section(
 )
 cardList.renderItems()
 
-function renderDefaultCards(item) {
-  const card = new Card(item, '#gallary-item', handleCardClick)
-  cardList.addItem(card.createCard())
-}
-
-const createItem = (data, tamplate, handleItemClick) => {
+function createItem(data, tamplate, handleItemClick) {
   const card = new Card(data, tamplate, handleItemClick)
   return card.createCard()
+}
+
+function renderDefaultCards(item) {
+  const card = createItem(item, '#gallary-item', handleCardClick)
+  cardList.addItem(card)
 }
 
 //popup images
