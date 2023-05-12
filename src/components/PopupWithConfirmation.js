@@ -1,22 +1,18 @@
-import { Popup } from '../components/Popup.js'
+import { Popup } from './Popup.js'
 
-class PopupWithForm extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
+class PopupWithConfirmation extends Popup {
+  constructor(popupSelector, handleCardDelet) {
     super(popupSelector)
-    this._handleFormSubmit = handleFormSubmit
+    this._handleCardDelet = handleCardDelet
     this._formElement = document.querySelector(this._popupSelector)
     this._form = this._formElement.querySelector('.popup__form')
     this._submitButton = this._formElement.querySelector('.popup__submit')
     this._defaultText = this._submitButton.textContent
   }
-  _getInputValues() {
-    this._inputList = this._formElement.querySelectorAll('.popup__input')
-    this._formValues = {}
-    this._inputList.forEach((input) => {
-      this._formValues[input.name] = input.value
-    })
 
-    return this._formValues
+  open(card) {
+    super.open()
+    this._card = card
   }
 
   setEventListeners() {
@@ -24,7 +20,7 @@ class PopupWithForm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault()
       this._renderButtonText(true)
-      this._handleFormSubmit(this._getInputValues())
+      this._handleCardDelet(this._card)
         .then(() => this.close())
         .catch((err) => {
           alert(err)
@@ -33,16 +29,11 @@ class PopupWithForm extends Popup {
     })
   }
 
-  close() {
-    super.close()
-    this._form.reset()
-  }
-
   _renderButtonText(saved) {
     saved
-      ? (this._submitButton.textContent = 'Сохранение...')
+      ? (this._submitButton.textContent = 'Удаление...')
       : (this._submitButton.textContent = this._defaultText)
   }
 }
 
-export { PopupWithForm }
+export { PopupWithConfirmation }

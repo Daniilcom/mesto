@@ -9,8 +9,17 @@ const descriptionInput = document.querySelector(
 //popup-add
 const buttonAddPlace = document.querySelector('.profile__add')
 const placeForm = document.forms['place-form']
-const namePlaceInput = document.querySelector('.popup__input_place_name')
-const linkPlaceInput = document.querySelector('.popup__input_place_link')
+
+//popuo-avatar
+const buttonEditAvatar = document.querySelector('.profile__avatar-upd')
+
+const requestData = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65/',
+  headers: {
+    authorization: '24288f94-4e58-4303-be1b-8968711a8d83',
+    'content-Type': 'application/json',
+  },
+}
 
 export {
   editorProfile,
@@ -19,6 +28,6 @@ export {
   descriptionInput,
   buttonAddPlace,
   placeForm,
-  namePlaceInput,
-  linkPlaceInput,
+  buttonEditAvatar,
+  requestData,
 }

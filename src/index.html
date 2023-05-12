@@ -15,11 +15,12 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img
-          class="profile__avatar"
-          src="<%=require('./images/profile__avatar.jpg')%>"
-          alt="Аватар"
-        />
+        <img class="profile__avatar" alt="Аватар" />
+        <button
+          type="button"
+          class="profile__avatar-upd"
+          title="Обновить аватар профиля"
+        ></button>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button
@@ -106,7 +107,7 @@
             />
             <span class="link-error popup__input-error"></span>
           </label>
-          <button class="popup__submit" type="submit">Сохранить</button>
+          <button class="popup__submit" type="submit">Создать</button>
         </form>
       </div>
     </div>
@@ -117,13 +118,50 @@
         <p class="popup__name"></p>
       </article>
     </div>
+    <div id="popup-avatar" class="popup">
+      <div class="popup__container">
+        <button type="button" class="popup__close" title="Закрыть"></button>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <form
+          name="avatar-form"
+          class="popup__form"
+          id="form-avatar"
+          novalidate
+        >
+          <label for="link-input" class="popup__label">
+            <input
+              name="link"
+              id="avatar"
+              type="url"
+              placeholder="Ссылка на аватар"
+              required
+              class="popup__input popup__input_place_link"
+            />
+            <span class="link-error popup__input-error"></span>
+          </label>
+          <button class="popup__submit" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div id="popup-confirm" class="popup">
+      <div class="popup__container">
+        <button type="button" class="popup__close" title="Закрыть"></button>
+        <h3 class="popup__title">Вы уверены?</h3>
+        <form name="confirm-form" class="popup__form" id="form-confirm">
+          <button class="popup__submit" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
     <template id="gallary-item">
       <li class="gallary__item">
         <button type="button" class="gallary__trash"></button>
         <img class="gallary__image" />
         <div class="gallary__info">
           <h2 class="gallary__description"></h2>
-          <button type="button" class="gallary__like"></button>
+          <div class="gallary__like-container">
+            <button type="button" class="gallary__like"></button>
+            <p class="gallary__like-counter"></p>
+          </div>
         </div>
       </li>
     </template>

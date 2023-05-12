@@ -1,12 +1,13 @@
 import '../pages/index.css'
-import { initialCards } from '../utils/dataCards.js'
 import { validationSettings } from '../utils/validationSettings.js'
 import { Card } from '../components/Card.js'
 import { FormValidator } from '../components/FormValidator.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js'
 import { UserInfo } from '../components/UserInfo.js'
 import { Section } from '../components/Section.js'
+import { Api } from '../components/Api.js'
 import {
   editorProfile,
   profileForm,
@@ -14,50 +15,79 @@ import {
   descriptionInput,
   buttonAddPlace,
   placeForm,
-  namePlaceInput,
-  linkPlaceInput,
+  buttonEditAvatar,
+  requestData,
 } from '../utils/constants.js'
+
+const api = new Api(requestData)
 
 //render cards
 const cardList = new Section(
   {
-    items: initialCards,
-    renderer: renderDefaultCards,
+    renderer: (item) => {
+      const cardElement = createItem(item)
+      cardList.addItem(cardElement)
+    },
   },
   '.gallary__items'
 )
-cardList.renderItems()
 
-function createItem(data, tamplate, handleItemClick) {
-  const card = new Card(data, tamplate, handleItemClick)
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, initialCards]) => {
+    userInfo.setUserInfo(data)
+    cardList.renderItems(initialCards)
+  })
+  .catch((err) => {
+    alert(err)
+  })
+
+function createItem(data) {
+  const userId = userInfo.getUserId()
+  const card = new Card(data, userId, '#gallary-item', {
+    handleCardClick: (title, link) => {
+      openImgPopup.open(title, link)
+    },
+    handleLikeClick: () => {
+      const cardId = card.getCardId()
+      const liked = card.likedCard()
+      const res = liked ? api.deleteLikeCard(cardId) : api.addLikeCard(cardId)
+      res
+        .then((initialCards) => {
+          card.setLikesCard(initialCards)
+          card.renderLikes()
+        })
+        .catch((err) => {
+          alert(err)
+        })
+    },
+    handleDeleteClick: () => {
+      openConfirmPopup.open(card)
+    },
+  })
   return card.createCard()
-}
-
-function renderDefaultCards(item) {
-  const card = createItem(item, '#gallary-item', handleCardClick)
-  cardList.addItem(card)
 }
 
 //popup images
 const openImgPopup = new PopupWithImage('#popup-img')
 openImgPopup.setEventListeners()
 
-function handleCardClick(name, link) {
-  openImgPopup.open(name, link)
-}
-
 //popup edit user profile
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
   infoSelector: '.profile__description',
+  avatarSelector: '.profile__avatar',
 })
 
 const popupEditProfile = new PopupWithForm('#popup-edit', handleEditFormSubmit)
 popupEditProfile.setEventListeners()
 
-function handleEditFormSubmit(data) {
-  userInfo.setUserInfo(data)
-  popupEditProfile.close()
+async function handleEditFormSubmit(data) {
+  try {
+    const editedData = await api.sendUserInfo(data)
+    userInfo.setUserInfo(editedData)
+  } catch (err) {
+    alert(err)
+  }
 }
 
 function openProfilePopup() {
@@ -71,22 +101,51 @@ function openProfilePopup() {
 const popupAddCard = new PopupWithForm('#popup-add', handleAddFormSubmit)
 popupAddCard.setEventListeners()
 
-function handleAddFormSubmit() {
-  cardList.addItem(
-    createItem(
-      {
-        name: namePlaceInput.value,
-        link: linkPlaceInput.value,
-      },
-      '#gallary-item',
-      handleCardClick
-    )
-  )
-  popupAddCard.close()
+async function handleAddFormSubmit(card) {
+  try {
+    const dataCard = await api.addCard(card)
+    const item = createItem(dataCard)
+    cardList.addItem(item)
+    popupAddCard.close()
+  } catch (err) {
+    alert(err)
+  }
 }
 
-function openAddCardPopup() {
-  popupAddCard.open()
+//popup confirm
+const openConfirmPopup = new PopupWithConfirmation(
+  '#popup-confirm',
+  handleCardDelete
+)
+openConfirmPopup.setEventListeners()
+
+async function handleCardDelete(card) {
+  const cardId = card.getCardId()
+  try {
+    await api.deleteCard(cardId)
+    openConfirmPopup.close()
+    card.handleCardDelete()
+  } catch (err) {
+    alert(err)
+  }
+}
+
+//popup avatar
+const popupAvatar = new PopupWithForm('#popup-avatar', handleAvatarFormSubmit)
+popupAvatar.setEventListeners()
+
+async function handleAvatarFormSubmit(link) {
+  try {
+    const data = await api.updAvatar(link)
+    userInfo.setUserInfo(data)
+  } catch (err) {
+    alert(err)
+  }
+}
+
+//open popups
+function openPopup(popup) {
+  popup.open()
 }
 
 //validation
@@ -100,4 +159,7 @@ validationAdd.enableValidation()
 editorProfile.addEventListener('click', openProfilePopup)
 
 //popup-add
-buttonAddPlace.addEventListener('click', openAddCardPopup)
+buttonAddPlace.addEventListener('click', () => openPopup(popupAddCard))
+
+//popup-avatar
+buttonEditAvatar.addEventListener('click', () => openPopup(popupAvatar))
