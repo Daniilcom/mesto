@@ -8,9 +8,9 @@ class PopupWithForm extends Popup {
     this._form = this._formElement.querySelector('.popup__form')
     this._submitButton = this._formElement.querySelector('.popup__submit')
     this._defaultText = this._submitButton.textContent
+    this._inputList = this._formElement.querySelectorAll('.popup__input')
   }
   _getInputValues() {
-    this._inputList = this._formElement.querySelectorAll('.popup__input')
     this._formValues = {}
     this._inputList.forEach((input) => {
       this._formValues[input.name] = input.value
@@ -23,13 +23,7 @@ class PopupWithForm extends Popup {
     super.setEventListeners()
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault()
-      this._renderButtonText(true)
       this._handleFormSubmit(this._getInputValues())
-        .then(() => this.close())
-        .catch((err) => {
-          alert(err)
-        })
-        .finally(() => this._renderButtonText(false))
     })
   }
 
@@ -38,7 +32,7 @@ class PopupWithForm extends Popup {
     this._form.reset()
   }
 
-  _renderButtonText(saved) {
+  renderButtonText(saved) {
     saved
       ? (this._submitButton.textContent = 'Сохранение...')
       : (this._submitButton.textContent = this._defaultText)

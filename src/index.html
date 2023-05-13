@@ -22,13 +22,13 @@
           title="Обновить аватар профиля"
         ></button>
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button
             type="button"
             class="profile__edit"
             title="Редактировать профиль"
           ></button>
-          <p class="profile__description">Исследователь океана</p>
+          <p class="profile__description"></p>
         </div>
         <button
           type="button"
@@ -128,16 +128,16 @@
           id="form-avatar"
           novalidate
         >
-          <label for="link-input" class="popup__label">
+          <label for="avatar-input" class="popup__label">
             <input
-              name="link"
+              name="avatar"
               id="avatar"
               type="url"
               placeholder="Ссылка на аватар"
               required
-              class="popup__input popup__input_place_link"
+              class="popup__input popup__input_avatar_link"
             />
-            <span class="link-error popup__input-error"></span>
+            <span class="avatar-error popup__input-error"></span>
           </label>
           <button class="popup__submit" type="submit">Сохранить</button>
         </form>

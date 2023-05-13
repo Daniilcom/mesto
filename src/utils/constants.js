@@ -12,6 +12,7 @@ const placeForm = document.forms['place-form']
 
 //popuo-avatar
 const buttonEditAvatar = document.querySelector('.profile__avatar-upd')
+const avatarForm = document.forms['avatar-form']
 
 const requestData = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65/',
@@ -28,6 +29,7 @@ export {
   descriptionInput,
   buttonAddPlace,
   placeForm,
+  avatarForm,
   buttonEditAvatar,
   requestData,
 }

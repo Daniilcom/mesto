@@ -17,6 +17,7 @@ import {
   placeForm,
   buttonEditAvatar,
   requestData,
+  avatarForm,
 } from '../utils/constants.js'
 
 const api = new Api(requestData)
@@ -61,7 +62,7 @@ function createItem(data) {
         })
     },
     handleDeleteClick: () => {
-      openConfirmPopup.open(card)
+      popupConfirm.open(card)
     },
   })
   return card.createCard()
@@ -82,11 +83,15 @@ const popupEditProfile = new PopupWithForm('#popup-edit', handleEditFormSubmit)
 popupEditProfile.setEventListeners()
 
 async function handleEditFormSubmit(data) {
+  popupEditProfile.renderButtonText(true)
   try {
     const editedData = await api.sendUserInfo(data)
     userInfo.setUserInfo(editedData)
+    popupEditProfile.close()
   } catch (err) {
     alert(err)
+  } finally {
+    popupEditProfile.renderButtonText(false)
   }
 }
 
@@ -102,6 +107,7 @@ const popupAddCard = new PopupWithForm('#popup-add', handleAddFormSubmit)
 popupAddCard.setEventListeners()
 
 async function handleAddFormSubmit(card) {
+  popupAddCard.renderButtonText(true)
   try {
     const dataCard = await api.addCard(card)
     const item = createItem(dataCard)
@@ -109,24 +115,29 @@ async function handleAddFormSubmit(card) {
     popupAddCard.close()
   } catch (err) {
     alert(err)
+  } finally {
+    popupAddCard.renderButtonText(false)
   }
 }
 
 //popup confirm
-const openConfirmPopup = new PopupWithConfirmation(
+const popupConfirm = new PopupWithConfirmation(
   '#popup-confirm',
   handleCardDelete
 )
-openConfirmPopup.setEventListeners()
+popupConfirm.setEventListeners()
 
 async function handleCardDelete(card) {
   const cardId = card.getCardId()
+  popupConfirm.renderButtonText(true)
   try {
     await api.deleteCard(cardId)
-    openConfirmPopup.close()
     card.handleCardDelete()
+    popupConfirm.close()
   } catch (err) {
     alert(err)
+  } finally {
+    popupConfirm.renderButtonText(false)
   }
 }
 
@@ -135,11 +146,15 @@ const popupAvatar = new PopupWithForm('#popup-avatar', handleAvatarFormSubmit)
 popupAvatar.setEventListeners()
 
 async function handleAvatarFormSubmit(link) {
+  popupAvatar.renderButtonText(true)
   try {
     const data = await api.updAvatar(link)
     userInfo.setUserInfo(data)
+    popupAvatar.close()
   } catch (err) {
     alert(err)
+  } finally {
+    popupAvatar.renderButtonText(false)
   }
 }
 
@@ -151,9 +166,11 @@ function openPopup(popup) {
 //validation
 const validationEdit = new FormValidator(validationSettings, profileForm)
 const validationAdd = new FormValidator(validationSettings, placeForm)
+const validationAvatar = new FormValidator(validationSettings, avatarForm)
 
 validationEdit.enableValidation()
 validationAdd.enableValidation()
+validationAvatar.enableValidation()
 
 // popup - edit
 editorProfile.addEventListener('click', openProfilePopup)

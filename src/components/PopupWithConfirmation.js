@@ -19,17 +19,11 @@ class PopupWithConfirmation extends Popup {
     super.setEventListeners()
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault()
-      this._renderButtonText(true)
       this._handleCardDelet(this._card)
-        .then(() => this.close())
-        .catch((err) => {
-          alert(err)
-        })
-        .finally(() => this._renderButtonText(false))
     })
   }
 
-  _renderButtonText(saved) {
+  renderButtonText(saved) {
     saved
       ? (this._submitButton.textContent = 'Удаление...')
       : (this._submitButton.textContent = this._defaultText)

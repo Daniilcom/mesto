@@ -75,7 +75,7 @@ export class Api {
       headers: this._headers,
       method: 'PATCH',
       body: JSON.stringify({
-        avatar: data.link,
+        avatar: data.avatar,
       }),
     })
   }
